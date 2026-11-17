@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "j+ijVAota40NbgGAqPRfbYf8mNiqSYjy4RcguTVocoA=",
+  "Source": "OnlineShop",
+  "BasePath": "_content/OnlineShop",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "OnlineShop\\wwwroot",
+      "Source": "OnlineShop",
+      "ContentRoot": "C:\\Users\\Acer\\Downloads\\ifp_linq\\assignment7_LINQ_IFP\\onlineShopp\\wwwroot\\",
+      "BasePath": "_content/OnlineShop",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Acer\\Downloads\\ifp_linq\\assignment7_LINQ_IFP\\onlineShopp\\wwwroot\\app.css",
+      "SourceId": "OnlineShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Downloads\\ifp_linq\\assignment7_LINQ_IFP\\onlineShopp\\wwwroot\\",
+      "BasePath": "_content/OnlineShop",
+      "RelativePath": "app.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app.css"
+    }
+  ]
+}
