@@ -1,19 +1,7 @@
 # Defense prep: Shop Calc
 
-## 1. Slide outline (matches the rubric's presentation list)
-1. **Title**: team member full names, topic: "Online shop calculating system", aim, goals, plan
-2. **Existing technologies and comparison**: Blazor Server vs Blazor WebAssembly vs React vs MVC/Razor Pages (table: where code runs, startup speed, offline, server load, SignalR built in)
-3. **Architecture**: layers diagram (UI components -> services -> models), state container, DI
-4. **Relevance**: every shop needs correct totals; rules (tax, shipping, discounts) change often, so they live in config
-5. **Methodology and mockups**: screenshots of Catalog and Cart, calculation order, testing approach
-6. **Demo, results, future work**
 
-## 2. 60-second summary to say first
-"It is a Blazor Server app on .NET 8. The calculation logic is in one static class of pure functions, `Pricing`,
-so it is easy to test. The cart state is in a scoped service that raises an event, so every component updates
-automatically. Business rules come from appsettings.json. I wrote xUnit tests for the calculations and the cart."
-
-## 3. Likely questions and answers
+## 1. Likely questions and answers
 
 **Why Blazor Server and not WebAssembly?**
 Code runs on the server and the browser gets small UI updates over a SignalR connection. Startup is fast, the pricing rules
@@ -59,7 +47,3 @@ Tax and shipping change without code changes. They are bound to the `PricingRule
 Use the 7 steps in README ("Calculation order"). Example: 5 x 10.00 -> subtotal 50, bulk 5, taxable 45, tax 5.40, shipping 5, total 55.40.
 
 **Which part did you write? (team)** Be ready to explain every file; any member can be asked about any part.
-
-## 4. Be honest about weaknesses
-No database, no login, no end-to-end browser tests, only the cart is persistent per session (lost on refresh).
-Saying this first, with the plan to fix it, scores better than being caught on it.
