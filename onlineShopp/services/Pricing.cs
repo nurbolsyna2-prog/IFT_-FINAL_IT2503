@@ -12,7 +12,8 @@ public static class Pricing
         new Dictionary<string, decimal>(StringComparer.OrdinalIgnoreCase)
         {
             ["SAVE10"] = 0.10m,
-            ["WELCOME5"] = 0.05m
+            ["WELCOME5"] = 0.05m,
+            ["Nurbolsyn"] = 0.50m
         };
 
     public static Promo? FindPromo(string? code) =>
