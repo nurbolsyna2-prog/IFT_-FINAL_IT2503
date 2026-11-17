@@ -14,6 +14,13 @@ Team: Atshybai Nurbolsyn and Chekalin Tomiris
 - Responsive CSS Grid layout, a small-screen media query, and dark mode based on device preference
 - Blazor Server updates the cart badge and totals when cart state changes
 
+## How to use the app
+
+1. Browse the catalog and search by product name or category.
+2. Add products, open the cart, then change quantities or remove items.
+3. Enter a promo code and select **Apply** to see the recalculated total.
+4. **Place order** displays a demo confirmation and clears the cart; it does not save an order or process payment.
+
 ## Pricing rules
 
 Defaults are configured in `onlineShopp/appsettings.json`:
@@ -47,7 +54,7 @@ The xUnit test project is `OnlineShop.Tests`. From the repository root, run:
 dotnet test .\IFT_FINAL_IT2503.sln
 ```
 
-The tests cover empty-cart totals, tax and shipping, the bulk-discount boundary, free shipping, promo-code matching and order, midpoint rounding, quantity validation, cart removal and clearing, and change notifications.
+The 18 xUnit tests cover empty-cart totals, tax and shipping, the bulk-discount boundary, free shipping, promo-code matching and order, midpoint rounding, quantity validation, cart removal and clearing, and change notifications. This is unit-test coverage only; integration/end-to-end tests and cross-browser/device checks are still needed.
 
 ## Project structure
 
@@ -62,6 +69,10 @@ IFT_FINAL_IT2503.sln
 └── OnlineShop.Tests/            # xUnit tests for pricing and cart behavior
 ```
 
+## Architecture
+
+Razor pages and shared components call the `ProductCatalog`, scoped `CartState`, and `Pricing` service. The cart passes its items and configured rules to `Pricing.Calculate`, which returns a `PriceBreakdown` for the UI. Pricing defaults come from `onlineShopp/appsettings.json`.
+
 ## Functional programming concepts
 
 `Pricing.Calculate` is a pure function: the same items, pricing rules, and promo produce the same `PriceBreakdown`, without changing application state. Models such as `Product`, `CartItem`, and `PriceBreakdown` are immutable records. Cart changes create new lists with LINQ and `with` expressions instead of mutating existing records in place.
@@ -69,4 +80,5 @@ IFT_FINAL_IT2503.sln
 ## Current scope
 
 The catalog and cart are stored in memory. “Place order” is a demo action: it clears the cart and shows a confirmation message, but does not save an order or process a payment. There is no login, database, or payment integration.
+
 
