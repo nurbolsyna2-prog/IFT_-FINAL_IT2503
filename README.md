@@ -1,44 +1,72 @@
 # Online Shop Calculation
 
-This is a shopping web application built with C#, .NET 8, and Blazor Server. It includes a product catalog, a stateful shopping cart, promo codes, and automatic price calculation.
+A classroom shopping application built with **C#, .NET 8, and Blazor Server**. It demonstrates a product catalog, a stateful cart, promo codes, and a transparent price calculation.
 
-**Team:** Atshybai Nurbolsyn and Chekalin Tomiris
-
-## Overview
-
-The application is built using a modular component-based architecture. Its main goal is to demonstrate catalog filtering, cart state management, and transparent price calculations with bulk discounts, promo codes, taxes, and shipping rules.
+Team: Atshybai Nurbolsyn and Chekalin Tomiris
 
 ## Features
 
-- 10 sample products organized by category
-- Real-time search bar to filter products by name or category
-- Adding and removing items in the cart, with quantity adjustments from 1 to 99
-- Case-insensitive promo codes: `SAVE10` (10%), `WELCOME5` (5%), and `NURBOLSYN` (50%)
-- Detailed price breakdown showing subtotal, bulk discount, promo discount, tax, shipping, and total
-- Responsive layout using CSS Grid with dark mode support based on system preferences
-- Instant UI updates for the cart badge and totals via Blazor Server
+- 10 sample products, grouped by category
+- Live search by product name or category
+- Add and remove products; change quantities from 1 to 99
+- Promo codes: `SAVE10` (10%), `WELCOME5` (5%), and `NURBOLSYN` (50%); matching is case-insensitive
+- Price summary with subtotal, bulk and promo discounts, tax, shipping, and total
+- Responsive CSS Grid layout, a small-screen media query, and dark mode based on device preference
+- Blazor Server updates the cart badge and totals when cart state changes
 
-## Pricing Rules
+## Pricing rules
 
-Default pricing parameters are configured in `onlineShopp/appsettings.json`:
+Defaults are configured in `onlineShopp/appsettings.json`:
 
-- **Currency:** `$`
-- **Tax rate:** 12% (calculated after all discounts are applied)
-- **Bulk discount:** 10% off an individual product line when buying 5 or more units of that item
-- **Promo discount:** applied after the bulk discount
-- **Shipping:** `$5` if the discounted amount before tax is below `$100`, and free at `$100` or above
-- Financial values use the `decimal` type, with discounts and taxes rounded to two decimal places using midpoint rounding away from zero
+- Currency: `$`
+- Tax rate: 12%, calculated after discounts
+- Bulk discount: 10% on an individual product line when its quantity is 5 or more
+- Promo discount: applied after the bulk discount
+- Shipping: $5 when the discounted taxable amount is below $100; free at or above $100
+- Money is represented by `decimal`; tax and discounts are rounded to two places using midpoint rounding away from zero
 
-**Calculation order:** Subtotal → Bulk discount → Promo discount → Tax → Shipping → Total.
+Calculation order: subtotal → bulk discount → promo discount → tax → shipping → total.
 
-## Technologies and Architecture
+## Run the app
 
-- **Tech Stack:** C# 12, .NET 8, Blazor Server, and xUnit for automated testing.
-- **Functional Programming Concepts:** The `Pricing.Calculate` method is implemented as a pure function, meaning identical inputs always return the same `PriceBreakdown` without modifying external state. Data models such as `Product`, `CartItem`, and `PriceBreakdown` are immutable records. Instead of mutating lists in place, cart operations produce new lists using LINQ and `with` expressions.
-
-## How to Run the Application
-
-Make sure the .NET 8 SDK is installed on your machine. From the root directory of the repository (where `IFT_FINAL_IT2503.sln` is located), run:
+Install the .NET 8 SDK. From the repository root (the folder containing `IFT_FINAL_IT2503.sln`), run:
 
 ```powershell
 dotnet run --project .\onlineShopp\OnlineShop.csproj
+```
+
+Open the `Now listening on:` URL printed in the terminal, for example `http://localhost:5000`. Keep the terminal open while using the app; press `Ctrl+C` to stop it.
+
+In VS Code, open the repository root, then choose **Terminal → New Terminal** and run the command above.
+
+## Run the tests
+
+The xUnit test project is `OnlineShop.Tests`. From the repository root, run:
+
+```powershell
+dotnet test .\IFT_FINAL_IT2503.sln
+```
+
+The tests cover empty-cart totals, tax and shipping, the bulk-discount boundary, free shipping, promo-code matching and order, midpoint rounding, quantity validation, cart removal and clearing, and change notifications.
+
+## Project structure
+
+```text
+IFT_FINAL_IT2503.sln
+├── onlineShopp/                 # Blazor Server application
+│   ├── Components/              # Layout, pages, and reusable UI components
+│   ├── Models/                  # Product, cart, pricing rules, and results
+│   ├── services/                # Catalog, cart state, and pricing calculation
+│   ├── wwwroot/app.css          # Responsive styling and dark mode
+│   └── Program.cs               # App setup and dependency registration
+└── OnlineShop.Tests/            # xUnit tests for pricing and cart behavior
+```
+
+## Functional programming concepts
+
+`Pricing.Calculate` is a pure function: the same items, pricing rules, and promo produce the same `PriceBreakdown`, without changing application state. Models such as `Product`, `CartItem`, and `PriceBreakdown` are immutable records. Cart changes create new lists with LINQ and `with` expressions instead of mutating existing records in place.
+
+## Current scope
+
+The catalog and cart are stored in memory. “Place order” is a demo action: it clears the cart and shows a confirmation message, but does not save an order or process a payment. There is no login, database, or payment integration.
+
