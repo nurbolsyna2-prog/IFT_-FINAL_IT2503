@@ -16,7 +16,9 @@ public class ProductCatalog
         new(7, "Headphones", "Audio", 79.00m),
         new(8, "Bluetooth Speaker", "Audio", 45.50m),
         new(9, "Notebook A5", "Stationery", 3.20m),
-        new(10, "Gel Pen Set", "Stationery", 5.75m)
+        new(10, "Gel Pen Set", "Stationery", 5.75m),
+        new(11, "Smartphone", "Electronics", 699.00m)
+
     ];
 
     public IReadOnlyList<Product> All => _products;
